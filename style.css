@@ -1,1 +1,124 @@
+/* Configurações Globais e Variáveis de Cores */
+:root {
+    --bg-color: #f4f7f6;
+    --text-color: #333;
+    --header-color: #222;
+    --card-text-front: #111;
+    --card-text-back: #222;
+    --base-font-size: 16px;
+}
 
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --header-color: #fff;
+    --card-text-front: #000; /* Mantém boa leitura nas cores claras dos cartões */
+    --card-text-back: #000;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: var(--base-font-size);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Barra de Acessibilidade */
+.accessibility-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-self: flex-end;
+}
+
+.accessibility-bar button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.accessibility-bar button:hover {
+    background-color: #0056b3;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    color: var(--header-color);
+    margin-bottom: 10px;
+}
+
+/* Grid de Flashcards */
+.flashcards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Estrutura do Cartão (Efeito 3D) */
+.card {
+    background-color: transparent;
+    height: 200px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    border-radius: 10px;
+}
+
+/* Classe aplicada via JS para girar */
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.card-front {
+    color: var(--card-text-front);
+}
+
+.card-back {
+    color: var(--card-text-back);
+    transform: rotateY(180deg);
+    filter: brightness(0.9); /* Diferencia levemente o verso */
+}
